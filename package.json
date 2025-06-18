@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Trabalho final de PPI",
   "homepage": "https://github.com/JoaoPedroFurtado/PPI-FINAL#readme",
+  "main": "index.js",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/JoaoPedroFurtado/PPI-FINAL/issues"
   },
@@ -10,11 +12,15 @@
     "type": "git",
     "url": "git+https://github.com/JoaoPedroFurtado/PPI-FINAL.git"
   },
+  "author": "João Pedro Furtado",
   "license": "ISC",
-  "author": "",
-  "type": "commonjs",
-  "main": "index.js",
   "scripts": {
-    "test": "npm start"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1"
   }
 }
