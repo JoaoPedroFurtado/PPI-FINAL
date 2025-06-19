@@ -581,6 +581,7 @@ app.post("/cadastroJogadores", verificaLogin, (req, res) => {
         });
         res.redirect("/listaJogadores");
     } else {
+        let opcoesTimes = listaDeTimes.map(t => `<option value="${t.nomeTime}">${t.nomeTime}</option>`).join("");
         let conteudo = `
         <html lang="pt-br">
         <head>
@@ -709,13 +710,23 @@ app.post("/cadastroJogadores", verificaLogin, (req, res) => {
         conteudo += `</div><div class="mb-3 col-md-4">`;
         if (!equipe) {
             conteudo += `
-                <label for="equipe" class="form-label">Equipe</label>
-                <input type="text" class="form-control" id="equipe" name="equipe" required>
+                    <div class="mb-3 col-md-12">
+                        <label for="equipe" class="form-label">Equipe</label>
+                        <select class="form-select" id="equipe" name="equipe" required>
+                            <option value="">Selecione a equipe</option>
+                            ${opcoesTimes}
+                        </select>
+                    </div>
                 <span class="text-danger">O campo Equipe é obrigatório!</span>`;
         } else {
             conteudo += `
-                <label for="equipe" class="form-label">Equipe</label>
-                <input type="text" class="form-control" id="equipe" name="equipe" value="${equipe}" required>`;
+                    <div class="mb-3 col-md-12">
+                        <label for="equipe" class="form-label">Equipe</label>
+                        <select class="form-select" id="equipe" name="equipe" required>
+                            <option value="">Selecione a equipe</option>
+                            ${opcoesTimes}
+                        </select>
+                    </div>`;
         }
 
         conteudo += `</div>
