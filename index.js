@@ -25,66 +25,108 @@ app.use(session({
 app.use(cookieParser());
 
 app.get("/", verificaLogin, (req, res) => {
-    const ultimoLoginRegistrado = req.cookies.ultimoLoginRegistrado;
+    const ultimoLoginRegistrado = req.cookies.ultimoLogin;
     res.send(`
-        <!DOCTYPE html>
+            <!DOCTYPE html>
         <html lang="pt-br">
         <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
-            <title>Página inicial do Trabalho final</title>
-            <style>
-                body {
-                    background-color: #6a0dad; /* Um tom de roxo */
-                    min-height: 100vh;
-                    display: flex;
-                    flex-direction: column;
-                }
-                .navbar {
-                    background-color: #8a2be2 !important; /* Um tom de roxo para a navbar */
-                    box-shadow: 0 4px 6px rgba(50, 0, 250, 0.1);
-                }
-                .navbar-nav .nav-link {
-                    color: #ffffff !important; /* Cor do texto dos links na navbar */
-                }
-                .navbar-nav .nav-link.text-danger {
-                    color: #ffcccc !important; /* Cor do texto do link Sair */
-                }
-            </style>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Página inicial do Trabalho final</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <style>
+            body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #6a0dad;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            }
+
+            .navbar {
+            background-color: #8a2be2 !important; 
+            box-shadow: 0 4px 6px rgba(50, 0, 250, 0.1);
+            }
+
+            .navbar-nav .nav-link {
+            color: #ffffff !important; 
+            }
+
+            .navbar-nav .nav-link.text-danger {
+            color: #ffcccc !important; 
+            }
+
+            .custom-btn {
+            border: 1px solid #ccc;
+            background-color: transparent;
+            color: white;
+            }
+
+            .custom-btn:hover {
+            background-color: #ffffff11;
+            }
+
+            .icon-spacing {
+            margin-right: 6px;
+            }
+        </style>
         </head>
+
         <body>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Home</a>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/cadastroTimes">Cadastro de Times</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/cadastroJogadores">Cadastro de Jogadores</a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link text-danger d-flex align-items-center" href="/logout">
-                                    <i class="bi bi-box-arrow-right me-1"></i> Sair
-                                </a>
-                            </li>
-                        </ul>
-                        <span class="navbar-text">${ultimoLoginRegistrado?"Ultimo acesso:" + ultimoLoginRegistrado: ""} </span>
-                    </div>
-                </div>
-            </nav>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+            <a class="navbar-brand text-white" href="/">Home</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cadastroTimes">Cadastro de Times</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cadastroJogadores">Cadastro de Jogadores</a>
+                </li>
+                </ul>
+                <ul class="navbar-nav">
+                <li class="nav-item d-flex align-items-center">
+                    <span class="navbar-text text-white me-3">
+                    ${ultimoLoginRegistrado ? "Último acesso: " + ultimoLoginRegistrado : ""}
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger d-flex align-items-center" href="/logout">
+                    <i class="bi bi-box-arrow-right me-1"></i> Sair
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
 
-            <div class="container flex-grow-1 d-flex justify-content-center align-items-center">
-                </div>
+        <div class="container flex-grow-1 d-flex justify-content-center mt-5 align-items-start">
+            <div class="text-center">
+            <h1 class="text-white mb-4">Bem-vindo ao Sistema</h1>
+            <div class="d-flex justify-content-center flex-wrap gap-2">
+                <a href="/cadastroTimes" class="btn custom-btn me-2">
+                <i class="bi bi-plus-circle icon-spacing"></i>Cadastro de Times
+                </a>
+                <a href="/cadastroJogadores" class="btn custom-btn me-2">
+                <i class="bi bi-person-plus-fill icon-spacing"></i>Cadastro de Jogadores
+                </a>
+                <a href="/listaTimes" class="btn custom-btn me-2">
+                <i class="bi bi-list-ul icon-spacing"></i>Listar Times
+                </a>
+                <a href="/listaJogadores" class="btn custom-btn">
+                <i class="bi bi-people-fill icon-spacing"></i>Listar Jogadores
+                </a>
+            </div>
+            </div>
+        </div>
 
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
         </body>
         </html>
+
   `);
 });
 
@@ -141,7 +183,7 @@ app.get("/cadastroTimes", verificaLogin, (req, res) => {
         <body>
         <div class="form-container">
             <h2>Cadastro de Times</h2>
-            <form class="row" action="/cadastroTimes" method="POST">
+            <form class="row" action="/cadastroTimes" method="POST" novalidate>
             <div class="mb-3 col-md-4">
                 <label for="nomeTime" class="form-label">Nome do Time</label>
                 <input type="text" class="form-control" id="nomeTime" name="nomeTime" required>
@@ -175,7 +217,7 @@ app.post("/cadastroTimes", verificaLogin, (req, res) => {
     if(nomeTime && nomeTecnico && telTime) {
         listaDeTimes.push({
             nomeTime,
-            nomeTecnico,        
+            nomeTecnico,
             telTime
         });
         res.redirect("/listaTimes");
@@ -232,13 +274,13 @@ app.post("/cadastroTimes", verificaLogin, (req, res) => {
         <body>
         <div class="form-container">
             <h2>Cadastro de Times</h2>
-            <form class="row" action="/cadastroTimes" method="POST">
+            <form class="row" action="/cadastroTimes" method="POST" >
             <div class="mb-3 col-md-4"> `
             if(!nomeTime) {
                 conteudo += `
                 <label for="nomeTime" class="form-label">Nome do Time</label>
                 <input type="text" class="form-control" id="nomeTime" name="nomeTime" required>
-                <div class="alert alert-danger">O campo Nome do Time é obrigatório!</div>
+                <div class="text-danger"> Nome do Time é obrigatório!</div>
                 `
             }else {
                 conteudo += `
@@ -252,7 +294,7 @@ app.post("/cadastroTimes", verificaLogin, (req, res) => {
                 conteudo += `
                 <label for="nomeTecnico" class="form-label">Nome do Técnico</label>
                 <input type="text" class="form-control" id="nomeTecnico" name="nomeTecnico" required>
-                <div class="alert alert-danger">O campo Nome do Técnico é obrigatório!</div>
+                <span class="text-danger">Nome do Técnico é obrigatório!</span>
                 `
             }else {
                 conteudo += `
@@ -266,7 +308,7 @@ app.post("/cadastroTimes", verificaLogin, (req, res) => {
                 conteudo += `
                 <label for="telTime" class="form-label">Telefone do Time</label>
                 <input type="text" class="form-control" id="telTime" name="telTime" required>
-                <div class="alert alert-danger">O campo Telefone do Time é obrigatório!</div>
+                <div class="text-danger">Telefone do Time é obrigatório!</div>
             `
             }else {
                 conteudo += `
@@ -275,13 +317,9 @@ app.post("/cadastroTimes", verificaLogin, (req, res) => {
                 `
             }
             conteudo += `</div>
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center mt-3">
-                    <a class="btn btn-secondary px-5" href="/">Voltar</a>
-                </div>
-                <div class="col-6 d-flex justify-content-center mt-3">
+            <div class="d-flex gap-2 items-center justify-content-center">
+                    <a class="btn btn-secondary px-5" type="button" href="/">Voltar</a>
                     <button type="submit" class="btn btn-primary px-5">Cadastrar</button>
-                </div>
             </div>
             </form>
         </div>
@@ -397,9 +435,9 @@ app.get("/listaTimes", verificaLogin, (req, res) => {
     conteudo += `
                 </tbody>
             </table>
-
-            <div class="btn-voltar">
-                <a class="btn btn-secondary" href="/cadastroTimes">Cadastrar mais times</a>
+            <div class="d-flex gap-2 items-center justify-content-center">
+                    <a class="btn btn-secondary px-5" type="button" href="/">Voltar</a>
+                    <a type="submit" class="btn btn-secondary px-5" href="/cadastroTimes">Cadastrar mais times</a>
             </div>
         </div>
     </body>
@@ -466,7 +504,7 @@ app.get("/cadastroJogadores", verificaLogin, (req, res) => {
         <body>
             <div class="form-container">
                 <h2>Cadastro de Jogadores</h2>
-                <form class="row" action="/cadastroJogadores" method="POST">
+                <form class="row" action="/cadastroJogadores" method="POST" novalidate>
                     <div class="mb-3 col-md-4">
                         <label for="nomeJogador" class="form-label">Nome do Jogador</label>
                         <input type="text" class="form-control" id="nomeJogador" name="nomeJogador" required>
@@ -681,14 +719,10 @@ app.post("/cadastroJogadores", verificaLogin, (req, res) => {
         }
 
         conteudo += `</div>
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center mt-3">
-                    <button class="btn btn-secondary px-5" href="/">Voltar</button>
-                </div>
-                <div class="col-6 d-flex justify-content-center mt-3">
-                    <button type="submit" class="btn btn-primary px-5">Cadastrar</button>
-                </div>
-            </div>
+                    <div class="d-flex gap-2 justify-content-center mt-4">
+                        <a href="/" class="btn btn-secondary px-5">Voltar</a>
+                        <button type="submit" class="btn btn-primary px-5">Cadastrar</button>
+                    </div>
             </form>
         </div>
         </body>
@@ -696,6 +730,133 @@ app.post("/cadastroJogadores", verificaLogin, (req, res) => {
         `;
         res.send(conteudo);
     }
+});
+
+
+
+app.get("/listaJogadores", verificaLogin, (req, res) => {
+    let conteudo = `
+    <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Lista de Jogadores</title>
+        <style>
+            body {
+                background: linear-gradient(to right, #4e54c8, #8f94fb);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+                padding: 20px;
+            }
+
+            .table-container {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 15px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                border: 2px solid #6c63ff;
+                width: 100%;
+                max-width: 1000px;
+            }
+
+            h2 {
+                text-align: center;
+                color: #4e54c8;
+                margin-bottom: 30px;
+            }
+
+            .table {
+                border: 1px solid #6c63ff;
+            }
+
+            th {
+                background-color: #6c63ff;
+                color: #fff;
+                text-align: center;
+            }
+
+            td {
+                text-align: center;
+                color: #4e54c8;
+                font-weight: bold;
+            }
+
+            .btn-voltar {
+                display: flex;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .btn-secondary {
+                background-color: #6c63ff;
+                border-color: #6c63ff;
+                color: white;
+                padding: 10px 30px;
+                font-weight: bold;
+                border-radius: 8px;
+            }
+
+            .btn-secondary:hover {
+                background-color: #5848d2;
+                border-color: #5848d2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="table-container">
+            <h2>Lista de Jogadores</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Nº da Camisa</th>
+                        <th>Data de Nascimento</th>
+                        <th>Altura (cm)</th>
+                        <th>Gênero</th>
+                        <th>Posição</th>
+                        <th>Equipe</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+    if (listaDeJogadores.length === 0) {
+        conteudo += `
+                    <tr>
+                        <td colspan="7">Nenhum jogador cadastrado ainda.</td>
+                    </tr>`;
+    } else {
+        for (let jogador of listaDeJogadores) {
+            conteudo += `
+                    <tr>
+                        <td>${jogador.nomeJogador}</td>
+                        <td>${jogador.numeroCamisa}</td>
+                        <td>${jogador.dataNascimento}</td>
+                        <td>${jogador.altura}</td>
+                        <td>${jogador.genero}</td>
+                        <td>${jogador.posicao}</td>
+                        <td>${jogador.equipe}</td>
+                    </tr>`;
+        }
+    }
+
+    conteudo += `
+                </tbody>
+            </table>
+
+            <div class="d-flex gap-2 items-center justify-content-center">
+                    <a class="btn btn-secondary px-5" type="button" href="/">Voltar</a>
+                    <a class="btn btn-secondary" href="/cadastroJogadores">Cadastrar mais jogadores</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+
+    res.send(conteudo);
 });
 
 
@@ -803,7 +964,7 @@ app.post("/login", (req, res) => {
     if (usuarioLogin === "admin" && senhaLogin === "123") {
         req.session.logado = true;
         const dataAtual = new Date();
-        res.cookie('ultimoLogin', dataAtual.toLocaleDateString(), { maxAge: 1000 * 60 * 60 * 24 * 30 });
+        res.cookie('ultimoLogin', dataAtual.toLocaleString(), { maxAge: 1000 * 60 * 60 * 24 * 30 });
         res.redirect("/");
     } else {
         res.send(`
