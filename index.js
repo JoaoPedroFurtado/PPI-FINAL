@@ -707,16 +707,16 @@ app.post("/cadastroJogadores", verificaLogin, (req, res) => {
                 <input type="text" class="form-control" id="posicao" name="posicao" value="${posicao}" required>`;
         }
 
-        conteudo += `</div><div class="mb-3 col-md-4">`;
+        conteudo += `</div><div class="mb-3 col-md-12">`;
         if (!equipe) {
             conteudo += `
-                    <div class="mb-3 col-md-12">
+                   
                         <label for="equipe" class="form-label">Equipe</label>
                         <select class="form-select" id="equipe" name="equipe" required>
                             <option value="">Selecione a equipe</option>
                             ${opcoesTimes}
                         </select>
-                    </div>
+                    
                 <span class="text-danger">O campo Equipe é obrigatório!</span>`;
         } else {
             conteudo += `
